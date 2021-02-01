@@ -2,6 +2,7 @@ package sample;
 
 import io.cloudstate.javasupport.*;
 import sample.domain.TemperatureLocationEntity;
+import sample.domain.Temperaturelocation;
 
 public final class Main {
 
@@ -9,7 +10,8 @@ public final class Main {
         new CloudState()
                 .registerEventSourcedEntity(
                         TemperatureLocationEntity.class,
-                        TemperatureTracking.getDescriptor().findServiceByName("TemperatureTrackingService")
+                        TemperatureTracking.getDescriptor().findServiceByName("TemperatureTrackingService"),
+                        Temperaturelocation.getDescriptor()
                 )
                 .start().toCompletableFuture().get();
     }
