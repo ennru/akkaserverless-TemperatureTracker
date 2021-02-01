@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package sample.domain;
+
+message NameSetEvent {
+    string id = 1;
+    string name = 2;
+}
+
+message TemperatureSetEvent {
+    string id = 1;
+    int32 temperature = 2;
+}

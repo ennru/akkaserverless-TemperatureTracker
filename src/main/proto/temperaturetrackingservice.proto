@@ -1,0 +1,36 @@
+// This is the public API offered by your entity.
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "cloudstate/entity_key.proto";
+import "google/api/annotations.proto";
+
+package sample;
+
+option java_outer_classname = "TemperatureTracking";
+
+message SetNameCommand {
+    string entity_id = 1 [(.cloudstate.entity_key) = true];
+    string name = 2;
+}
+
+message SetTemperatureCommand {
+    string entity_id = 1 [(.cloudstate.entity_key) = true];
+    int32 value = 2;
+}
+
+message GetTemperatureCommand {
+    string entity_id = 1 [(.cloudstate.entity_key) = true];
+}
+
+message TemperatureState {
+    string entity_id = 1;
+    string name = 2;
+    int32 value = 3;
+}
+
+service TemperatureTrackingService {
+    rpc SetName(SetNameCommand) returns (google.protobuf.Empty);
+    rpc SetTemperature(SetTemperatureCommand) returns (google.protobuf.Empty);
+    rpc GetValue(GetTemperatureCommand) returns (TemperatureState);
+}
